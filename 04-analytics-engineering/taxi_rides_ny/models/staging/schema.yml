@@ -2,15 +2,16 @@ version: 2
 
 sources:
   - name: staging
-    database: taxi-rides-ny-339813-412521
+    database: taxi-rides-ny-409108
      # For postgres:
       #database: production
-    schema: trips_data_all
+    schema: ny_taxi
 
       # loaded_at_field: record_loaded_at
     tables:
-      - name: green_tripdata
-      - name: yellow_tripdata
+      - name: native_green_taxi_data
+      - name: yellow_cab_data
+      - name: fhv_tripdata
          # freshness:
            # error_after: {count: 6, period: hour}
 
@@ -116,7 +117,7 @@ models:
       columns:
           - name: tripid
             description: Primary key for this table, generated with a concatenation of vendorid+pickup_datetime
-            tests:
+            tests:  
                 - unique:
                     severity: warn
                 - not_null:
